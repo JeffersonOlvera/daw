@@ -10,7 +10,7 @@
       href="/assets/icon/favicon-16x16.png"
       type="image/x-icon"
     />
-    <title>Proyecto</title>
+    <title>Inicio</title>
     <style>
       @import url('/assets/css/style.css');
 
@@ -218,7 +218,6 @@
         cursor: pointer;
       }
 
-      /* Show nav list on mobile when toggled */
       .nav-list-visible {
         display: flex;
       }
@@ -307,7 +306,6 @@
           align-items: center;
         }
 
-        /* New styles for mobile */
         .nav-list {
           display: none;
           flex-direction: column;
@@ -417,19 +415,23 @@
         .frm-flex > label {
           font-size: 14px;
         }
+
+        h1[class='logo'] {
+          font-size: xx-large;
+        }
       }
     </style>
   </head>
   <body id="inicio">
     <header class="nav">
-      <h1>Logo</h1>
+      <h1 class="logo">Logo</h1>
       <nav>
         <ul class="nav-list">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#lista-beneficios">Beneficios</a></li>
           <li><a href="#lista-precios">Precios</a></li>
           <li>
-            <a href="/src/pages/contacto.html">Contacto</a>
+            <a href="contacto.html">Contacto</a>
           </li>
           <li>
             <a href="#integrantes">Integrantes</a>
