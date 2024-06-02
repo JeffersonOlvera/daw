@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Olvera Suarez Jefferson" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link
+      rel="icon"
+      href="/assets/icon/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <title>Proyecto</title>
+    <style>
+      @import url('/assets/css/style.css');
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        gap: 40vh;
+        background-color: var(--secondary-color);
+        height: 50px;
+        z-index: 1000;
+      }
+
+      .nav h1 {
+        color: var(--primary-color);
+        font-size: x-large;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 18px;
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+        margin: 36px 0;
+      }
+
+      .hero-content {
+        text-wrap: balance;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 600px;
+      }
+
+      section h2 {
+        font-size: x-large;
+      }
+
+      .hero-content button,
+      .plan button {
+        font-size: x-large;
+        font-weight: 600;
+        width: 200px;
+      }
+
+      .hero-content span {
+        margin-top: 18px;
+      }
+
+      section > .seccion-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section,
+      .beneficio,
+      .plan {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn-prueba-gratis {
+        margin-top: 36px;
+      }
+
+      .beneficio > img {
+        width: 100px;
+      }
+
+      .seccion-list {
+        display: flex;
+        gap: 12px;
+        margin: 24px 200px;
+      }
+
+      .beneficio,
+      .plan {
+        background-color: var(--secondary-color);
+        width: 365px;
+        height: 184px;
+        padding: 28px 24px;
+        border-radius: 15px;
+        text-align: center;
+      }
+
+      article > h3 {
+        color: var(--pink);
+      }
+
+      .plan {
+        gap: 14px;
+        width: 250px;
+        height: 260px;
+        padding: 24px 18px;
+        margin: 0 18px;
+      }
+
+      .plan:hover {
+        transform: scale(1.1);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .plan h3 {
+        margin: 0 auto;
+        font-size: larger;
+      }
+
+      .plan > button {
+        margin-top: auto;
+      }
+
+      .plan li {
+        text-align: left;
+        font-size: small;
+        margin: 0 26px;
+      }
+
+      footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: var(--secondary-color);
+        padding: 24px 12px;
+      }
+
+      section[class='seccion mensaje'] {
+        background-color: var(--primary-color);
+        color: black;
+        padding: 20px 12px;
+        text-align: center;
+      }
+
+      .price {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .price > h4 {
+        font-size: xx-large;
+      }
+
+      div article[class='plan']:nth-child(2) {
+        height: 284px;
+      }
+
+      .frm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 550px;
+      }
+
+      .frm-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .frm-flex {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      input,
+      select,
+      textarea,
+      option {
+        color: black;
+        padding: 4px;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+      }
+
+      select {
+        width: 260px;
+      }
+      input:focus {
+        outline: none;
+        border: 1px solid var(--pink);
+      }
+
+      .frm-campo {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Show nav list on mobile when toggled */
+      .nav-list-visible {
+        display: flex;
+      }
+
+      .menu {
+        background-color: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        padding: 12px;
+        z-index: 1000;
+      }
+
+      .menu > ul li:nth-child(6) {
+        margin-top: 18px;
+      }
+
+      .invisible {
+        display: none;
+      }
+
+      /* Media queries */
+
+      @media only screen and (max-width: 768px) {
+        .nav-toggle {
+          display: block;
+        }
+
+        .nav-list {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          width: 100%;
+          background-color: var(--secondary-color);
+          padding: 10px;
+        }
+
+        .nav-list li {
+          margin-bottom: 10px;
+        }
+
+        .nav {
+          gap: 20px;
+        }
+
+        .nav h1 {
+          font-size: large;
+        }
+
+        .nav-list {
+          gap: 4px;
+        }
+
+        .hero {
+          flex-direction: column;
+          margin: 24px 0;
+        }
+
+        .hero-content {
+          width: 100%;
+        }
+
+        .seccion-list {
+          flex-direction: column;
+          margin: 12px 0;
+        }
+
+        .benefit,
+        .pricing-plan {
+          width: 100%;
+          margin: 12px 0;
+        }
+
+        .pricing-plan {
+          height: auto;
+        }
+
+        footer {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* New styles for mobile */
+        .nav-list {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          width: 100%;
+          background-color: var(--secondary-color);
+          padding: 10px;
+        }
+
+        .nav-list li {
+          margin-bottom: 10px;
+        }
+
+        .nav-list a {
+          color: var(--primary-color);
+          font-size: large;
+        }
+
+        .nav-toggle {
+          display: block;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: large;
+          color: var(--primary-color);
+          cursor: pointer;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .nav {
+          gap: 10px;
+        }
+
+        .nav h1 {
+          font-size: medium;
+        }
+
+        .nav-list {
+          gap: 8px;
+        }
+
+        .hero-content {
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+
+        .hero-image {
+          width: 350px;
+        }
+
+        .hero-content button,
+        .plan button {
+          font-size: medium;
+          width: 200px;
+        }
+
+        .beneficio > img {
+          width: 50px;
+        }
+
+        div[class='seccion-list'] article[class='beneficio'] {
+          width: 340px;
+        }
+
+        .seccion-list {
+          margin: 8px auto;
+        }
+
+        .beneficio,
+        .plan {
+          padding: 20px 16px;
+        }
+
+        .price > h4 {
+          font-size: x-large;
+        }
+
+        footer {
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .frm-grid,
+        .frm-flex {
+          display: flex;
+          flex-direction: column;
+        }
+        select {
+          width: 100%;
+          font-size: smaller;
+        }
+        option {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body id="inicio">
+    <header class="nav">
+      <h1>Logo</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#lista-beneficios">Beneficios</a></li>
+          <li><a href="#lista-precios">Precios</a></li>
+          <li>
+            <a href="/src/pages/contacto.html">Contacto</a>
+          </li>
+          <li>
+            <a href="#integrantes">Integrantes</a>
+          </li>
+        </ul>
+
+        <span class="nav-toggle">
+          <img src="/assets/icon/burger-bar.png" />
+        </span>
+      </nav>
+      <span class="nav-list">
+        <a href="/dashboard.html" class="btn">Iniciar sesión</a>
+        <a class="btn">Registrarse</a>
+      </span>
+      <div class="menu invisible">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#lista-beneficios">Beneficios</a></li>
+          <li><a href="#lista-precios">Precios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="#integrantes">Integrantes</a></li>
+
+          <li><a href="/dashboard.html">Iniciar sesión</a></li>
+          <li><a>Registrarse</a></li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-image">
+          <img
+            src="/assets/img/dashboard.png"
+            alt="Imagen del panel de control"
+          />
+        </div>
+        <div class="hero-content">
+          <h2>Gestiona miembros y suscripciones en un solo lugar</h2>
+          <p>
+            Administre sus membresías y suscripciones con facilidad. Nuestra
+            poderosa plataforma proporciona todas las herramientas que necesita
+            para hacer crecer su negocio.
+          </p>
+          <span><a href="/dashboard.html" class="btn">Prueba gratis</a></span>
+        </div>
+      </section>
+      <section id="lista-beneficios">
+        <h2>Beneficios de nuestro servicio</h2>
+        <div class="seccion-list">
+          <article class="beneficio">
+            <img
+              src="/assets/img/group.png"
+              alt="Icono de un grupo de personas"
+            />
+            <h3>Ahorra Tiempo y Dinero</h3>
+            <p>
+              Gestiona todas tus membresías y suscripciones en un solo lugar.
+            </p>
+          </article>
+          <article class="beneficio">
+            <img
+              src="/assets/img/credit-card.png"
+              alt="Icono de tarjeta de crédito"
+            />
+            <h3>Mejora en la Toma de Decisiones</h3>
+            <p>
+              Obtener insights detallados sobre el rendimiento de tus membresías
+              y suscripciones.
+            </p>
+          </article>
+          <article class="beneficio">
+            <img
+              src="/assets/img/analisis.png"
+              alt="Icono de una tabla de análisis"
+            />
+            <h3>Atención Personalizada al Cliente</h3>
+            <p>
+              Soporte dedicado y recursos personalizados para ayudarte a
+              resolver cualquier problema y maximizar el uso de nuestra
+              plataforma.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="lista-precios">
+        <h2>Ofrecemos estos planes</h2>
+        <div class="seccion-list precios">
+          <article class="plan">
+            <h3>Bronce</h3>
+            <div class="price">
+              <h4>$0</h4>
+              <p>/mes</p>
+            </div>
+            <ul>
+              <li>• Rastrea hasta 5 membresías</li>
+              <li>• Informes básicos</li>
+              <li>• Soporte por correo electrónico</li>
+            </ul>
+            <button>Comprar</button>
+          </article>
+          <article class="plan">
+            <h3>Plata</h3>
+            <div class="price">
+              <h4>$10</h4>
+              <p>/mes</p>
+            </div>
+            <ul>
+              <li>• Rastreo ilimitado de membresías</li>
+              <li>• Informes avanzados</li>
+              <li>• Soporte telefónico y por correo electrónico</li>
+            </ul>
+            <button>Comprar</button>
+          </article>
+          <article class="plan">
+            <h3>Oro</h3>
+            <div class="price">
+              <h4>$15</h4>
+              <p>/mes</p>
+            </div>
+            <ul>
+              <li>• Rastreo de membresías para tu equipo</li>
+              <li>• Informes personalizados</li>
+              <li>• Gerente de cuenta dedicado</li>
+            </ul>
+            <button>Comprar</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="seccion mensaje">
+        <h2>¡Empieza a gestionar tus membresías y suscripciones hoy!</h2>
+        <a href="/dashboard.html"> Regístrate gratis</a>
+      </section>
+    </main>
+
+    <footer id="integrantes">
+      <section>
+        <h3>Integrantes</h3>
+        <small style="margin-bottom: 20px"
+          >Click para dirigirse a cada pagina</small
+        >
+        <small>&copy; 2024 Grupo #5</small>
+        <address style="font-style: normal">
+          <ul>
+            <li><a href="/index.html">Olvera Suarez Jefferson</a></li>
+            <li>
+              <a href="/src/pages/dashboard.html"
+                >Carvajal Barcia Yeffrey Jair</a
+              >
+            </li>
+            <li>
+              <a href="/src/pages/reportes.html"
+                >Fernández Almeida Jair Javier</a
+              >
+            </li>
+            <li>
+              <a href="/src/pages/suscripciones.html"
+                >Jahir Bismark Fernández Nanande</a
+              >
+            </li>
+            <li>
+              <a href="/src/pages/miembros.html"
+                >Anchundia Caicedo Naldo Jonnel</a
+              >
+            </li>
+          </ul>
+        </address>
+      </section>
+    </footer>
+    <script>
+      const navToggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('.menu');
+
+      navToggle.addEventListener('click', () => {
+        menu.classList.toggle('invisible');
+      });
+    </script>
+  </body>
+</html>

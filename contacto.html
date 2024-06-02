@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Olvera Suarez Jefferson" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link
+      rel="icon"
+      href="/assets/icon/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <title>Proyecto</title>
+    <style>
+      @import url('/assets/css/style.css');
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        gap: 40vh;
+        background-color: var(--secondary-color);
+        height: 50px;
+        z-index: 1000;
+      }
+
+      .nav h1 {
+        color: var(--primary-color);
+        font-size: x-large;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 18px;
+      }
+
+      section h2 {
+        font-size: x-large;
+      }
+
+      main {
+        margin: 50px 4px;
+      }
+
+      section,
+      article {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      article {
+        width: 650px;
+      }
+
+      footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: var(--secondary-color);
+        padding: 24px 12px;
+      }
+
+      .frm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 550px;
+      }
+
+      .frm-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .frm-flex {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      input,
+      select,
+      textarea,
+      option {
+        color: black;
+        padding: 4px;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+      }
+
+      select {
+        width: 260px;
+      }
+      input:focus {
+        outline: none;
+        border: 1px solid var(--pink);
+      }
+
+      article > p {
+        text-align: center;
+        text-wrap: balance;
+        margin: 0 0 45px;
+      }
+
+      .frm-campo {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Media queries */
+
+      @media only screen and (max-width: 768px) {
+        .nav {
+          gap: 20px;
+        }
+
+        .nav h1 {
+          font-size: large;
+        }
+
+        .nav-list {
+          gap: 4px;
+        }
+
+        footer,
+        article {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* New styles for mobile */
+        .nav-list {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          width: 100%;
+          background-color: var(--secondary-color);
+          padding: 10px;
+        }
+
+        .nav-list li {
+          margin-bottom: 10px;
+        }
+
+        .nav-list a {
+          color: var(--primary-color);
+          font-size: large;
+        }
+
+        .nav-toggle {
+          display: block;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: large;
+          color: var(--primary-color);
+          cursor: pointer;
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        .nav {
+          gap: 10px;
+        }
+
+        .nav h1 {
+          font-size: medium;
+        }
+
+        .nav-list {
+          gap: 8px;
+        }
+
+        footer,
+        article {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        main {
+          margin: 50px 4px;
+        }
+
+        p {
+          text-align: center;
+          text-wrap: balance;
+          margin: 0 0 45px;
+        }
+
+        .frm-grid,
+        .frm-flex {
+          display: flex;
+          flex-direction: column;
+        }
+        select {
+          width: 100%;
+          font-size: smaller;
+        }
+        option {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body id="inicio">
+    <header class="nav">
+      <h1>Logo</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#lista-beneficios">Beneficios</a></li>
+          <li><a href="#lista-precios">Precios</a></li>
+          <li>
+            <a href="#">Contacto</a>
+          </li>
+          <li>
+            <a href="#integrantes">Integrantes</a>
+          </li>
+        </ul>
+      </nav>
+      <span>
+        <a href="/dashboard.html" class="btn">Iniciar sesión</a>
+        <a class="btn">Registrarse</a>
+      </span>
+    </header>
+    <main>
+      <section class="frm-contacto">
+        <article>
+          <h2>Contáctanos</h2>
+          <p>
+            ¿Tienes alguna pregunta acerca de nuestra plataforma? Estamos aqui
+            para ayudarte. Nuestro equipo está pendiente para responder a tus
+            inquietudes
+          </p>
+        </article>
+        <form action="" class="frm">
+          <div class="frm-grid">
+            <div class="frm-campo">
+              <label for="nombre">Nombre*</label>
+              <input id="nombre" type="text" placeholder="Juan" />
+            </div>
+            <div class="frm-campo">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" type="text" placeholder="Pérez" />
+            </div>
+            <div class="frm-campo">
+              <label for="email">Correo electrónico*</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="juan.perez@example.com"
+              />
+            </div>
+            <div class="frm-campo">
+              <label for="telefono">Teléfono*</label>
+              <input id="telefono" type="tel" placeholder="123456789" />
+            </div>
+          </div>
+          <div class="frm-campo">
+            <label for="compania">Nombre compañía*</label>
+            <input id="compania" type="text" placeholder="Mi Empresa S.A." />
+          </div>
+
+          <div class="frm-campo">
+            <label>Tipo de Empresa</label>
+            <div class="frm-flex">
+              <div>
+                <input
+                  type="radio"
+                  id="privada"
+                  name="tipo-empresa"
+                  value="privada"
+                  required
+                />
+                <label for="privada">Privada</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="publica"
+                  name="tipo-empresa"
+                  value="publica"
+                  required
+                />
+                <label for="publica">Pública</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="mixta"
+                  name="tipo-empresa"
+                  value="mixta"
+                  required
+                />
+                <label for="mixta">Otra</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="frm-flex">
+            <div class="frm-campo">
+              <label for="provincia">Provincia</label>
+              <select id="provincia">
+                <option value="" disabled selected>
+                  Seleccione una provincia
+                </option>
+                <option value="azuay">Azuay</option>
+                <option value="bolivar">Bolívar</option>
+                <option value="canar">Cañar</option>
+                <option value="carchi">Carchi</option>
+                <option value="chimborazo">Chimborazo</option>
+                <option value="cotopaxi">Cotopaxi</option>
+                <option value="el-oro">El Oro</option>
+                <option value="esmeraldas">Esmeraldas</option>
+                <option value="galapagos">Galápagos</option>
+                <option value="guayas">Guayas</option>
+                <option value="imbabura">Imbabura</option>
+                <option value="loja">Loja</option>
+                <option value="los-rios">Los Ríos</option>
+                <option value="manabi">Manabí</option>
+                <option value="morona-santiago">Morona Santiago</option>
+                <option value="napo">Napo</option>
+                <option value="orellana">Orellana</option>
+                <option value="pastaza">Pastaza</option>
+                <option value="pichincha">Pichincha</option>
+                <option value="santa-elena">Santa Elena</option>
+                <option value="santo-domingo">
+                  Santo Domingo de los Tsáchilas
+                </option>
+                <option value="sucumbios">Sucumbíos</option>
+                <option value="tungurahua">Tungurahua</option>
+                <option value="zamora-chinchipe">Zamora Chinchipe</option>
+              </select>
+            </div>
+            <div class="frm-campo">
+              <label for="ciudad">Ciudad*</label>
+
+              <select id="ciudad">
+                <option value="" disabled selected>
+                  Seleccione una ciudad
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="frm-campo">
+            <label for="mensaje">Mensaje*</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              cols="30"
+              rows="4"
+              placeholder="Mensaje"
+            ></textarea>
+          </div>
+          <div class="frm-campo">
+            <div class="frm-flex">
+              <label for="suscripcion"
+                >Desea usted recibir noticias y/o actualizaciones sobre nuestro
+                sitio web</label
+              >
+              <input type="checkbox" id="suscripcion" name="suscripcion" />
+            </div>
+          </div>
+          <button onclick="enviarForm()" type="submit">Enviar</button>
+        </form>
+      </section>
+    </main>
+
+    <footer id="integrantes">
+      <section>
+        <h3>Integrantes</h3>
+        <small style="margin-bottom: 20px"
+          >Click para dirigirse a cada pagina</small
+        >
+
+        <address style="font-style: normal">
+          <ul>
+            <li><a href="/index.html">Olvera Suarez Jefferson</a></li>
+            <li><a href="/dashboard.html">Carvajal Barcia Yeffrey Jair</a></li>
+            <li><a href="/reportes.html">Fernández Almeida Jair Javier</a></li>
+            <li>
+              <a href="/suscripciones.html">Jahir Bismark Fernández Nanande</a>
+            </li>
+            <li><a href="/miembros.html">Anchundia Caicedo Naldo Jonnel</a></li>
+          </ul>
+        </address>
+        <small>&copy; 2024 Grupo #5</small>
+      </section>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const provinciaSelect = document.getElementById('provincia');
+        const ciudadSelect = document.getElementById('ciudad');
+
+        const ciudades = {
+          azuay: ['Cuenca', 'Gualaceo', 'Nabón'],
+          bolivar: ['Guaranda', 'San Miguel', 'Chillanes'],
+          canar: ['Azogues', 'La Troncal', 'El Tambo'],
+          carchi: ['Tulcán', 'San Gabriel', 'Mira'],
+          chimborazo: ['Riobamba', 'Guano', 'Alausí'],
+          cotopaxi: ['Latacunga', 'Salcedo', 'La Maná'],
+          'el-oro': ['Machala', 'Santa Rosa', 'Pasaje'],
+          esmeraldas: ['Esmeraldas', 'Atacames', 'Quinindé'],
+          galapagos: [
+            'Puerto Ayora',
+            'Puerto Baquerizo Moreno',
+            'Puerto Villamil',
+          ],
+          guayas: ['Guayaquil', 'Durán', 'Samborondón'],
+          imbabura: ['Ibarra', 'Otavalo', 'Cotacachi'],
+          loja: ['Loja', 'Catamayo', 'Macará'],
+          'los-rios': ['Babahoyo', 'Quevedo', 'Vinces'],
+          manabi: ['Portoviejo', 'Manta', 'Bahía de Caráquez'],
+          'morona-santiago': ['Macas', 'Gualaquiza', 'Sucúa'],
+          napo: ['Tena', 'Archidona', 'El Chaco'],
+          orellana: ['Coca', 'Dayuma', 'Loreto'],
+          pastaza: ['Puyo', 'Mera', 'Santa Clara'],
+          pichincha: ['Quito', 'Cayambe', 'Machachi'],
+          'santa-elena': ['La Libertad', 'Salinas', 'Santa Elena'],
+          'santo-domingo': ['Santo Domingo', 'La Concordia'],
+          sucumbios: ['Nueva Loja', 'Shushufindi', 'Cascales'],
+          tungurahua: ['Ambato', 'Baños', 'Pelileo'],
+          'zamora-chinchipe': ['Zamora', 'Yantzaza', 'Zumbi'],
+        };
+
+        provinciaSelect.addEventListener('change', function () {
+          const provincia = this.value;
+          const ciudadesDeProvincia = ciudades[provincia] || [];
+
+          ciudadSelect.innerHTML =
+            '<option value="" disabled selected>Seleccione una ciudad</option>';
+
+          ciudadSelect.disabled = ciudadesDeProvincia.length === 0;
+
+          // Añadir nuevas opciones de ciudad
+          ciudadesDeProvincia.forEach((ciudad) => {
+            const option = document.createElement('option');
+            option.value = ciudad.toLowerCase().replace(/\s/g, '-');
+            option.textContent = ciudad;
+            ciudadSelect.appendChild(option);
+          });
+        });
+      });
+
+      const enviarForm = () => {
+        const nombre = document.getElementById('nombre').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const compania = document.getElementById('compania').value;
+        const provincia = document.getElementById('provincia').value;
+        const ciudad = document.getElementById('ciudad').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        // Verificar que los campos obligatorios no estén vacíos
+        if (
+          !nombre ||
+          !email ||
+          !telefono ||
+          !compania ||
+          !provincia ||
+          !ciudad ||
+          !mensaje
+        ) {
+          alert('Por favor completa todos los campos obligatorios.');
+          return false; // Detener el envío del formulario
+        }
+
+        // Verificar que se haya seleccionado al menos un tipo de empresa
+        const tipoEmpresaPrivada = document.getElementById('privada').checked;
+        const tipoEmpresaPublica = document.getElementById('publica').checked;
+        const tipoEmpresaMixta = document.getElementById('mixta').checked;
+
+        if (!tipoEmpresaPrivada && !tipoEmpresaPublica && !tipoEmpresaMixta) {
+          alert('Por favor selecciona al menos un tipo de empresa.');
+          return false; // Detener el envío del formulario
+        }
+
+        // Si todas las validaciones pasan, se puede enviar el formulario
+        alert('Formulario enviado');
+        return true;
+      };
+    </script>
+  </body>
+</html>
