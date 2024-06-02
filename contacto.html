@@ -10,7 +10,7 @@
       href="/assets/icon/favicon-16x16.png"
       type="image/x-icon"
     />
-    <title>Proyecto</title>
+    <title>Contacto</title>
     <style>
       @import url('/assets/css/style.css');
 
@@ -113,6 +113,43 @@
         flex-direction: column;
       }
 
+      .nav-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .nav-list-visible {
+        display: flex;
+      }
+
+      .menu {
+        background-color: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        padding: 12px;
+        z-index: 1000;
+      }
+
+      .menu > ul li:nth-child(6) {
+        margin-top: 18px;
+      }
+
+      .invisible {
+        display: none;
+      }
+
+      .frm-contacto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+      }
       /* Media queries */
 
       @media only screen and (max-width: 768px) {
@@ -135,7 +172,10 @@
           align-items: center;
         }
 
-        /* New styles for mobile */
+        article {
+          width: 95%;
+        }
+
         .nav-list {
           display: none;
           flex-direction: column;
@@ -166,6 +206,14 @@
           color: var(--primary-color);
           cursor: pointer;
         }
+
+        h1[class='logo'] {
+          font-size: larger;
+        }
+
+        .frm {
+          width: 95%;
+        }
       }
 
       @media only screen and (max-width: 480px) {
@@ -193,12 +241,6 @@
           margin: 50px 4px;
         }
 
-        p {
-          text-align: center;
-          text-wrap: balance;
-          margin: 0 0 45px;
-        }
-
         .frm-grid,
         .frm-flex {
           display: flex;
@@ -220,29 +262,53 @@
         .frm-flex > label {
           font-size: 14px;
         }
+
+        h1[class='logo'] {
+          font-size: xx-large;
+        }
+
+        .frm {
+          width: 95%;
+        }
       }
     </style>
   </head>
   <body id="inicio">
     <header class="nav">
-      <h1>Logo</h1>
+      <h1 class="logo">Logo</h1>
       <nav>
         <ul class="nav-list">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#lista-beneficios">Beneficios</a></li>
-          <li><a href="#lista-precios">Precios</a></li>
+          <li><a href="/#inicio">Inicio</a></li>
+          <li><a href="/#lista-beneficios">Beneficios</a></li>
+          <li><a href="/#lista-precios">Precios</a></li>
           <li>
-            <a href="#">Contacto</a>
+            <a href="contacto.html">Contacto</a>
           </li>
           <li>
-            <a href="#integrantes">Integrantes</a>
+            <a href="/#integrantes">Integrantes</a>
           </li>
         </ul>
+
+        <span class="nav-toggle">
+          <img src="/assets/icon/burger-bar.png" />
+        </span>
       </nav>
-      <span>
+      <span class="nav-list">
         <a href="/dashboard.html" class="btn">Iniciar sesión</a>
         <a class="btn">Registrarse</a>
       </span>
+      <div class="menu invisible">
+        <ul>
+          <li><a href="/#inicio">Inicio</a></li>
+          <li><a href="/#lista-beneficios">Beneficios</a></li>
+          <li><a href="/#lista-precios">Precios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="/#integrantes">Integrantes</a></li>
+
+          <li><a href="/dashboard.html">Iniciar sesión</a></li>
+          <li><a>Registrarse</a></li>
+        </ul>
+      </div>
     </header>
     <main>
       <section class="frm-contacto">
@@ -409,6 +475,13 @@
       </section>
     </footer>
     <script>
+      const navToggle = document.querySelector('.nav-toggle');
+      const menu = document.querySelector('.menu');
+
+      navToggle.addEventListener('click', () => {
+        menu.classList.toggle('invisible');
+      });
+
       document.addEventListener('DOMContentLoaded', function () {
         const provinciaSelect = document.getElementById('provincia');
         const ciudadSelect = document.getElementById('ciudad');
@@ -483,20 +556,18 @@
           !mensaje
         ) {
           alert('Por favor completa todos los campos obligatorios.');
-          return false; // Detener el envío del formulario
+          return false;
         }
 
-        // Verificar que se haya seleccionado al menos un tipo de empresa
         const tipoEmpresaPrivada = document.getElementById('privada').checked;
         const tipoEmpresaPublica = document.getElementById('publica').checked;
         const tipoEmpresaMixta = document.getElementById('mixta').checked;
 
         if (!tipoEmpresaPrivada && !tipoEmpresaPublica && !tipoEmpresaMixta) {
           alert('Por favor selecciona al menos un tipo de empresa.');
-          return false; // Detener el envío del formulario
+          return false;
         }
 
-        // Si todas las validaciones pasan, se puede enviar el formulario
         alert('Formulario enviado');
         return true;
       };
