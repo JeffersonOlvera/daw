@@ -150,6 +150,11 @@
         justify-content: center;
         gap: 20px;
       }
+
+      .error {
+        color: red;
+        font-size: small;
+      }
       /* Media queries */
 
       @media only screen and (max-width: 768px) {
@@ -212,7 +217,26 @@
         }
 
         .frm {
-          width: 95%;
+          width: 90%;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .frm-flex:has(.frm-campo label[for='provincia']) {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .frm-campo select[id='provincia'],
+        .frm-campo select[id='ciudad'] {
+          width: 100%;
         }
       }
 
@@ -241,22 +265,17 @@
           margin: 50px 4px;
         }
 
-        .frm-grid,
-        .frm-flex {
+        .frm-grid {
           display: flex;
           flex-direction: column;
         }
+
         select {
           width: 100%;
           font-size: smaller;
         }
         option {
           font-size: 14px;
-        }
-
-        .frm-flex {
-          display: flex;
-          flex-direction: row;
         }
 
         .frm-flex > label {
@@ -268,7 +287,26 @@
         }
 
         .frm {
-          width: 95%;
+          width: 90%;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .frm-flex:has(.frm-campo label[for='provincia']) {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .frm-campo select[id='provincia'],
+        .frm-campo select[id='ciudad'] {
+          width: 100%;
         }
       }
     </style>
@@ -320,15 +358,32 @@
             inquietudes
           </p>
         </article>
-        <form action="" class="frm">
+        <form
+          onsubmit="return enviarFormulario(event)"
+          name="contacto"
+          method="post"
+          class="frm"
+        >
           <div class="frm-grid">
             <div class="frm-campo">
               <label for="nombre">Nombre*</label>
-              <input id="nombre" type="text" placeholder="Juan" />
+              <input
+                id="nombre"
+                type="text"
+                placeholder="Juan"
+                oninput="validarCampo('nombre',3,'error-nombre')"
+              />
+              <span id="error-nombre" class="error"></span>
             </div>
             <div class="frm-campo">
-              <label for="apellido">Apellido</label>
-              <input id="apellido" type="text" placeholder="Pérez" />
+              <label for="apellido">Apellido*</label>
+              <input
+                id="apellido"
+                type="text"
+                placeholder="Pérez"
+                oninput="validarCampo('apellido',3,'error-apellido')"
+              />
+              <span id="error-apellido" class="error"></span>
             </div>
             <div class="frm-campo">
               <label for="email">Correo electrónico*</label>
@@ -337,17 +392,29 @@
                 type="email"
                 placeholder="juan.perez@example.com"
               />
+              <span id="error-email" class="error"></span>
             </div>
             <div class="frm-campo">
               <label for="telefono">Teléfono*</label>
-              <input id="telefono" type="tel" placeholder="123456789" />
+              <input
+                id="telefono"
+                type="tel"
+                placeholder="123456789"
+                oninput="validarTelefono()"
+              />
+              <span id="error-telefono" class="error"></span>
             </div>
           </div>
           <div class="frm-campo">
             <label for="compania">Nombre compañía*</label>
-            <input id="compania" type="text" placeholder="Mi Empresa S.A." />
+            <input
+              id="compania"
+              type="text"
+              placeholder="Mi Empresa S.A."
+              oninput="validarCampo('compania',5,'error-compania')"
+            />
+            <span id="error-compania" class="error"></span>
           </div>
-
           <div class="frm-campo">
             <label>Tipo de Empresa</label>
             <div class="frm-flex">
@@ -383,9 +450,8 @@
               </div>
             </div>
           </div>
-
           <div class="frm-flex">
-            <div class="frm-campo">
+            <div class="frm-campo select">
               <label for="provincia">Provincia</label>
               <select id="provincia">
                 <option value="" disabled selected>
@@ -418,8 +484,10 @@
                 <option value="tungurahua">Tungurahua</option>
                 <option value="zamora-chinchipe">Zamora Chinchipe</option>
               </select>
+              <span id="error-provincia" class="error"></span>
             </div>
-            <div class="frm-campo">
+
+            <div class="frm-campo select">
               <label for="ciudad">Ciudad*</label>
 
               <select id="ciudad">
@@ -427,6 +495,7 @@
                   Seleccione una ciudad
                 </option>
               </select>
+              <span id="error-ciudad" class="error"></span>
             </div>
           </div>
           <div class="frm-campo">
@@ -438,6 +507,7 @@
               rows="4"
               placeholder="Mensaje"
             ></textarea>
+            <span id="error-mensaje" class="error"></span>
           </div>
           <div class="frm-campo">
             <div class="frm-flex">
@@ -448,7 +518,7 @@
               <input type="checkbox" id="suscripcion" name="suscripcion" />
             </div>
           </div>
-          <button onclick="enviarForm()" type="submit">Enviar</button>
+          <button type="submit">Enviar</button>
         </form>
       </section>
     </main>
@@ -475,16 +545,15 @@
       </section>
     </footer>
     <script>
-      const navToggle = document.querySelector('.nav-toggle');
-      const menu = document.querySelector('.menu');
-
-      navToggle.addEventListener('click', () => {
-        menu.classList.toggle('invisible');
-      });
-
       document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.menu');
         const provinciaSelect = document.getElementById('provincia');
         const ciudadSelect = document.getElementById('ciudad');
+
+        navToggle.addEventListener('click', () => {
+          menu.classList.toggle('invisible');
+        });
 
         const ciudades = {
           azuay: ['Cuenca', 'Gualaceo', 'Nabón'],
@@ -526,7 +595,6 @@
 
           ciudadSelect.disabled = ciudadesDeProvincia.length === 0;
 
-          // Añadir nuevas opciones de ciudad
           ciudadesDeProvincia.forEach((ciudad) => {
             const option = document.createElement('option');
             option.value = ciudad.toLowerCase().replace(/\s/g, '-');
@@ -536,29 +604,106 @@
         });
       });
 
-      const enviarForm = () => {
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const telefono = document.getElementById('telefono').value;
-        const compania = document.getElementById('compania').value;
-        const provincia = document.getElementById('provincia').value;
-        const ciudad = document.getElementById('ciudad').value;
-        const mensaje = document.getElementById('mensaje').value;
+      const getElementValue = (id) => document.getElementById(id).value;
+      const setElementTextContent = (id, message) => {
+        document.getElementById(id).textContent = message;
+      };
 
-        // Verificar que los campos obligatorios no estén vacíos
-        if (
-          !nombre ||
-          !email ||
-          !telefono ||
-          !compania ||
-          !provincia ||
-          !ciudad ||
-          !mensaje
-        ) {
-          alert('Por favor completa todos los campos obligatorios.');
+      const validarCampo = (campoId, minLength = 3, errorId) => {
+        const campo = getElementValue(campoId);
+        const validacionLetras = /^[a-zA-Z\s]+$/;
+
+        if (!validacionLetras.test(campo)) {
+          setElementTextContent(
+            errorId,
+            'No puede contener números ni caracteres especiales'
+          );
+          return false;
+        } else if (campo.length < minLength) {
+          setElementTextContent(
+            errorId,
+            `Debe tener al menos ${minLength} caracteres.`
+          );
+          return false;
+        } else {
+          setElementTextContent(errorId, '');
+          return true;
+        }
+      };
+
+      const validarEmail = (email, errorId) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          setElementTextContent(errorId, 'Formato de email inválido.');
           return false;
         }
+        setElementTextContent(errorId, '');
+        return true;
+      };
 
+      const validarTelefono = (telefono, errorId) => {
+        if (isNaN(telefono)) {
+          setElementTextContent(
+            errorId,
+            'El teléfono debe contener solo números.'
+          );
+          return false;
+        } else if (telefono.length !== 10) {
+          setElementTextContent(
+            errorId,
+            'El teléfono debe tener exactamente 10 dígitos.'
+          );
+          return false;
+        } else {
+          setElementTextContent(errorId, '');
+          return true;
+        }
+      };
+
+      const comprobarVacios = () => {
+        const campos = [
+          'nombre',
+          'apellido',
+          'email',
+          'telefono',
+          'compania',
+          'provincia',
+          'ciudad',
+          'mensaje',
+        ];
+        const errores = {
+          nombre: 'error-nombre',
+          apellido: 'error-apellido',
+          email: 'error-email',
+          telefono: 'error-telefono',
+          compania: 'error-compania',
+          provincia: 'error-provincia',
+          ciudad: 'error-ciudad',
+          mensaje: 'error-mensaje',
+        };
+
+        let valido = true;
+
+        for (const campo of campos) {
+          const valor = getElementValue(campo);
+          if (!valor) {
+            setElementTextContent(errores[campo], 'Campo obligatorio.');
+            valido = false;
+          } else {
+            setElementTextContent(errores[campo], '');
+          }
+        }
+
+        if (!validarEmail(getElementValue('email'), errores.email))
+          valido = false;
+        if (!validarCampo('nombre', 3, errores.nombre)) valido = false;
+        if (!validarTelefono(getElementValue('telefono'), errores.telefono))
+          valido = false;
+
+        return valido;
+      };
+
+      const comprobarCheck = () => {
         const tipoEmpresaPrivada = document.getElementById('privada').checked;
         const tipoEmpresaPublica = document.getElementById('publica').checked;
         const tipoEmpresaMixta = document.getElementById('mixta').checked;
@@ -567,7 +712,15 @@
           alert('Por favor selecciona al menos un tipo de empresa.');
           return false;
         }
+        return true;
+      };
 
+      const enviarFormulario = (event) => {
+        event.preventDefault();
+
+        if (!comprobarVacios() || !comprobarCheck()) {
+          return false;
+        }
         alert('Formulario enviado');
         return true;
       };
