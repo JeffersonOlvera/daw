@@ -14,8 +14,14 @@ export default defineConfig({
         conformidad: resolve(__dirname, 'conformidad.html'),
         registro: resolve(__dirname, 'registro.html'),
         soporte: resolve(__dirname, 'soporte.html'),
-        resgistro_miembros: resolve(__dirname, 'registro_miembros.html'),
-        renovacion_membresias: resolve(__dirname, 'renovacion_membresias.html'),
+        resgistro_miembros: resolve(
+          __dirname,
+          '/pagesformu/registro-miembros.html'
+        ),
+        renovacion_membresias: resolve(
+          __dirname,
+          '/pagesformu/renovacion_membresias.html'
+        ),
       },
     },
     outDir: 'dist',
