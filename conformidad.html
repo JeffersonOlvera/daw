@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Yeffrey Jair Carvajal Barcia">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <title>Conformidad del Cliente</title>
+  <style>
+    body {
+      font-family: system-ui;
+      background-color: var(--background);
+      color: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    
+    .form-container {
+      background-color: var(--secondary-color);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+
+    #conformidadForm{
+      padding: 10px;
+    }
+    
+    .form-container h2 {
+      margin: 20px 0;
+      color: var(--primary-color);
+    }
+    
+    .form-container div {
+      margin-bottom: 15px;
+    }
+    
+    .form-container label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--white);
+      border-radius: 5px;
+      background-color: var(--background);
+      color: var(--white);
+    }
+    .form-container input[type="number"]{
+      color: black;
+    }
+
+    
+    .form-container button {
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .form-container a{
+      border: 1px solid var(--primary-color);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    
+    .form-container button:hover {
+      background-color: var(--hover-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Formulario de Conformidad del Cliente</h2>
+    <form id="conformidadForm">
+      <div>
+        <label for="satisfaccion">¿Está satisfecho con la página?</label>
+        <input type="text" id="satisfaccion" name="satisfaccion" required>
+      </div>
+      <div>
+        <label for="experiencia">Califique su experiencia del 1 al 5:</label>
+        <input type="number" id="experiencia" name="experiencia" min="1" max="5" required>
+      </div>
+      <div>
+        <label for="comentarios">¿Tienes algún comentario acerca de cómo podríamos mejorar tu experiencia?</label>
+        <textarea id="comentarios" name="comentarios" rows="4" required></textarea>
+      </div>
+      <div>
+        <label for="ayuda">¿Fue de ayuda el soporte de la página?</label>
+        <input type="radio" id="ayuda_si" name="ayuda" value="si" required> Sí
+        <input type="radio" id="ayuda_no" name="ayuda" value="no" required> No
+      </div>
+      <div>
+        <label for="suscribir">¿Te volverías a suscribir?</label>
+        <input type="checkbox" id="suscribir" name="suscribir"> Sí
+      </div>
+      <div>
+        <a href="./dashboard.html" class="cancelar">Cancelar</a>
+        <button type="submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+    document.getElementById('conformidadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Validación de campos
+      const satisfaccion = document.getElementById('satisfaccion').value.trim();
+      const experiencia = document.getElementById('experiencia').value.trim();
+      const comentarios = document.getElementById('comentarios').value.trim();
+      const ayuda = document.querySelector('input[name="ayuda"]:checked');
+      const suscribir = document.getElementById('suscribir').checked;
+
+      if (!satisfaccion || !experiencia || !comentarios || !ayuda) {
+        alert('Todos los campos son obligatorios.');
+        return;
+      }
+      
+      if (experiencia < 1 || experiencia > 5) {
+        alert('La experiencia debe estar entre 1 y 5.');
+        return;
+      }
+
+      alert('Formulario enviado con éxito.');
+      document.getElementById('conformidadForm').reset();
+    });
+  </script>
+</body>
+</html>

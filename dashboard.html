@@ -7,26 +7,6 @@
     <link rel="stylesheet" href="/assets/css/style.css" />
     <title>Dashboard</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        border: none;
-        outline: none;
-        text-decoration: none;
-        list-style: none;
-      }
-
-      :root {
-        --background: #121212;
-        --primary-color: #9145b6;
-        --secondary-color: #2f2c30;
-        --hover-color: #473a4b;
-        --pink: #ff99bf;
-        --white: #f3f3f3;
-        --dark-purple: #130f26;
-      }
-
       body {
         font-family: system-ui;
         display: flex;
@@ -71,7 +51,6 @@
         display: flex;
         flex-direction: column;
         flex: 1;
-        padding: 20px;
       }
 
       .header {
@@ -106,6 +85,7 @@
         flex: 1;
         min-width: 200px;
         color: var(--white);
+        position: relative;
       }
 
       .card h3 {
@@ -123,6 +103,18 @@
       .chart {
         width: 100%;
         height: auto;
+      }
+
+      .refresh-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--primary-color);
+        border: none;
+        color: var(--white);
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
       }
 
       @media (max-width: 768px) {
@@ -204,6 +196,8 @@
         <li><a href="/miembros.html">Miembros</a></li>
         <li><a href="/suscripciones.html">Suscripciones</a></li>
         <li><a href="/reportes.html">Reportes</a></li>
+        <li><a href="/soporte.html">Soporte</a></li>
+        <li><a href="/conformidad.html">Conformidad</a></li>
         <li><a href="/index.html" id="btn-cerrar-sesion">Cerrar Sesion</a></li>
       </ul>
     </nav>
@@ -217,19 +211,23 @@
         <section class="stats">
           <div class="card">
             <h3>Total miembros</h3>
-            <p>1,450</p>
+            <p id="total-miembros">1,450</p>
+            <button class="refresh-btn" onclick="refreshStats('total-miembros')">Actualizar</button>
           </div>
           <div class="card">
             <h3>Suscripciones activas</h3>
-            <p>291</p>
+            <p id="suscripciones-activas">291</p>
+            <button class="refresh-btn" onclick="refreshStats('suscripciones-activas')">Actualizar</button>
           </div>
           <div class="card">
             <h3>Suscripciones expirada</h3>
-            <p>53</p>
+            <p id="suscripciones-expiradas">53</p>
+            <button class="refresh-btn" onclick="refreshStats('suscripciones-expiradas')">Actualizar</button>
           </div>
           <div class="card">
             <h3>Ingresos totales</h3>
-            <p>$7,394</p>
+            <p id="ingresos-totales">$7,394</p>
+            <button class="refresh-btn" onclick="refreshStats('ingresos-totales')">Actualizar</button>
           </div>
         </section>
         <section class="charts">
@@ -246,7 +244,7 @@
               </div>
             </div>
             <img
-              src="/assets/img/Suscripción.jpg"
+              src="/assets/img/chart-3.png"
               alt="Gráfico de porcentaje de suscripciones"
               class="chart"
             />
@@ -254,7 +252,7 @@
           <div class="card">
             <h3>Ventas</h3>
             <img
-              src="/assets/img/ventas.jpg"
+              src="/assets/img/chart.png"
               alt="Gráfico de ventas mensuales"
               class="chart"
             />
@@ -270,5 +268,17 @@
         </section>
       </main>
     </div>
+    
+    <script>
+      function refreshStats(id) {
+        const element = document.getElementById(id);
+        const randomValue = Math.floor(Math.random() * 1000);
+        if (id === 'ingresos-totales') {
+          element.innerText = '$' + randomValue;
+        } else {
+          element.innerText = randomValue;
+        }
+      }
+    </script>
   </body>
 </html>

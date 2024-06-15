@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="Author" content="Fernandez Almeida Jair Javier" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <title>Soporte técnico</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+      }
+      .sidebar {
+        width: 20%;
+        background-color: var(--secondary-color);
+        padding: 15px;
+        border-right: 1px solid var(--white);
+      }
+
+      .sidebar h1 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .sidebar ul {
+        margin-top: 18px;
+      }
+
+      .sidebar ul li {
+        margin-bottom: 15px;
+        overflow-x: hidden;
+      }
+
+      .sidebar ul li a {
+        color: var(--white);
+        padding: 10px;
+        display: block;
+        border-radius: 6px;
+        transition: all 0.3s;
+      }
+
+      .sidebar ul li a:hover {
+        background-color: var(--hover-color);
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      header {
+        background-color: var(--secondary-color);
+        color: var(--white);
+        padding: 10px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--white);
+      }
+
+      main {
+        height: 100%;
+        margin: 20px auto;
+      }
+
+      h3 {
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .frm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 550px;
+      }
+
+      .frm-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .frm-campo {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .frm-flex {
+        display: flex;
+        gap: 10px;
+      }
+
+      input, textarea {
+        color: black;
+        padding: 4px;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+      }
+
+      .error {
+        color: red;
+        font-size: small;
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 25%;
+          padding: 3px;
+          font-size: 0.8em;
+        }
+        .header h2 {
+          font-size: 1.5em;
+        }
+        .header-side button {
+          font-size: 16px;
+        }
+        .frm {
+          width: 90%;
+        }
+        main {
+          padding: 20px;
+        }
+        .frm-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <h1><a href="#">Logo</a></h1>
+      <ul>
+        <li><a href="/dashboard.html">Dashboard</a></li>
+        <li><a href="/miembros.html">Miembros</a></li>
+        <li><a href="/suscripciones.html">Suscripciones</a></li>
+        <li><a href="/reportes.html">Reportes</a></li>
+        <li><a href="/soporte.html">Soporte</a></li>
+        <li><a href="/conformidad.html">Conformidad</a></li>
+        <li><a href="/index.html" id="btn-cerrar-sesion">Cerrar Sesion</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <header>
+        <h2>Soporte técnico</h2>
+      </header>
+
+      <main>
+        <h3>Formulario para atención al cliente</h3>
+        <form
+          onsubmit="enviarFormulario(event)"
+          name="contacto"
+          method="post"
+          class="frm"
+        >
+          <div class="frm-grid">
+            <div class="frm-campo">
+              <label for="nombre">Nombre*</label>
+              <input
+                id="nombre"
+                type="text"
+                placeholder="Juan"
+                oninput="validarCampo('nombre',3,'error-nombre')"
+              />
+              <span id="error-nombre" class="error"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="apellido">Apellido*</label>
+              <input
+                id="apellido"
+                type="text"
+                placeholder="Pérez"
+                oninput="validarCampo('apellido',3,'error-apellido')"
+              />
+              <span id="error-apellido" class="error"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="email">Correo electrónico*</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="juan.perez@example.com"
+                oninput="validarEmail('email', 'error-email')"
+              />
+              <span id="error-email" class="error"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="telefono">Teléfono*</label>
+              <input
+                id="telefono"
+                type="tel"
+                placeholder="123456789"
+                oninput="validarTelefono('telefono', 'error-telefono')"
+              />
+              <span id="error-telefono" class="error"></span>
+            </div>
+          </div>
+
+          <div class="frm-campo">
+            <label>¿Con qué frecuencia se produce el error?</label>
+            <div>
+              <div>
+                <input
+                  type="radio"
+                  id="siempre"
+                  name="regularidad"
+                  value="siempre"
+                  required
+                />
+                <label for="siempre">Siempre que uso la plataforma</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="regular"
+                  name="regularidad"
+                  value="regular"
+                  required
+                />
+                <label for="regular">Con regularidad</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="poco"
+                  name="regularidad"
+                  value="poco"
+                  required
+                />
+                <label for="poco">Poco frecuente</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="frm-campo">
+            <label for="mensaje"
+              >Especifique el tipo de problema que presenta*</label
+            >
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              cols="30"
+              rows="4"
+              placeholder="Mensaje"
+            ></textarea>
+            <span id="error-mensaje" class="error"></span>
+          </div>
+
+          <div class="frm-campo">
+            <div class="frm-flex">
+              <label for="correos"
+                >Está de acuerdo que la plataforma envíe correos con respecto a
+                su inconveniente</label
+              >
+              <input type="checkbox" id="correos" name="correos" />
+            </div>
+          </div>
+
+          <button onsubmit="enviarFormulario(event)" type="submit">Enviar</button>
+        </form>
+      </main>
+    </div>
+
+    <script>
+       const getElementValue = (id) => document.getElementById(id).value;
+      const setElementTextContent = (id, message) => {
+        document.getElementById(id).textContent = message;
+      };
+
+      const validarCampo = (campoId, minLength = 3, errorId) => {
+        const campo = getElementValue(campoId);
+        const validacionLetras = /^[a-zA-Z\s]+$/;
+
+        if (!validacionLetras.test(campo)) {
+          setElementTextContent(
+            errorId,
+            'No puede contener números ni caracteres especiales'
+          );
+          return false;
+        } else if (campo.length < minLength) {
+          setElementTextContent(
+            errorId,
+            `Debe tener al menos ${minLength} caracteres.`
+          );
+          return false;
+        } else {
+          setElementTextContent(errorId, '');
+          return true;
+        }
+      };
+
+      const validarEmail = (emailId, errorId) => {
+        const email = getElementValue(emailId);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          setElementTextContent(errorId, 'Formato de email inválido.');
+          return false;
+        }
+        setElementTextContent(errorId, '');
+        return true;
+      };
+
+      const validarTelefono = (telefonoId, errorId) => {
+        const telefono = getElementValue(telefonoId);
+
+        if (isNaN(telefono)) {
+          setElementTextContent(
+            errorId,
+            'El teléfono debe contener solo números.'
+          );
+          return false;
+        } else if (telefono.length !== 10) {
+          setElementTextContent(
+            errorId,
+            'El teléfono debe tener exactamente 10 dígitos.'
+          );
+          return false;
+        } else {
+          setElementTextContent(errorId, '');
+          return true;
+        }
+      };
+
+      const comprobarVacios = () => {
+        const campos = [
+          'nombre',
+          'apellido',
+          'email',
+          'telefono',
+          'mensaje',
+        ];
+        const errores = {
+          nombre: 'error-nombre',
+          apellido: 'error-apellido',
+          email: 'error-email',
+          telefono: 'error-telefono',
+          mensaje: 'error-mensaje',
+        };
+
+        let valido = true;
+
+        for (const campo of campos) {
+          const valor = getElementValue(campo);
+          if (!valor) {
+            setElementTextContent(errores[campo], 'Campo obligatorio.');
+            valido = false;
+          } else {
+            setElementTextContent(errores[campo], '');
+          }
+        }
+
+        if (!validarEmail('email', errores.email))
+          valido = false;
+        if (!validarCampo('nombre', 3, errores.nombre)) valido = false;
+        if (!validarTelefono('telefono', errores.telefono)) valido = false;
+
+        return valido;
+      };
+
+      const comprobarCheck = () => {
+        const pocoCheck = document.getElementById('poco').checked;
+        const regularCheck = document.getElementById('regular').checked;
+        const siempreCheck = document.getElementById('siempre').checked;
+
+        if (!pocoCheck && !regularCheck && !siempreCheck) {
+          alert('Por favor selecciona al menos un tipo de tiempo de la problemática.');
+          return false;
+        }
+        return true;
+      };
+
+      const enviarFormulario = (event) => {
+        event.preventDefault();
+
+        if (!comprobarVacios() || !comprobarCheck()) {
+          return false;
+        }
+        return true;
+        alert('Formulario enviado con exito')
+      };
+    </script>
+  </body>
+</html>

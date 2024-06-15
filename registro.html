@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Anchundia Caicedo Naldo" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link
+      rel="icon"
+      href="/assets/icon/favicon-16x16.png"
+      type="image/x-icon"
+    />
+    <title>Registro</title>
+    <style>
+      @import url('/assets/css/style.css');
+
+      .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        gap: 40vh;
+        background-color: var(--secondary-color);
+        height: 50px;
+        z-index: 1000;
+      }
+
+      .nav h1 {
+        color: var(--primary-color);
+        font-size: x-large;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 18px;
+      }
+
+      section h2 {
+        font-size: x-large;
+      }
+
+      main {
+        margin: 50px 4px;
+      }
+
+      section,
+      article {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      article {
+        width: 650px;
+      }
+
+      footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: var(--secondary-color);
+        padding: 24px 12px;
+      }
+
+      .frm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 550px;
+      }
+
+      .frm-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .frm-flex {
+        display: flex;
+        justify-content: center;
+
+        gap: 12px;
+      }
+
+      input,
+      select,
+      textarea,
+      option {
+        color: black;
+        padding: 4px;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+      }
+
+      select {
+        width: 260px;
+      }
+      input:focus {
+        outline: none;
+        border: 1px solid var(--pink);
+      }
+
+      article > p {
+        text-align: center;
+        text-wrap: balance;
+        margin: 0 0 45px;
+      }
+
+      .frm-campo {
+      display: flex;
+       flex-direction: column;
+      }
+      .frm-terminos {
+        display: inline-flex;
+    align-items: center;
+    gap: 5px; 
+    width: auto;
+    white-space: nowrap; 
+
+      }
+
+
+      .nav-toggle {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .nav-list-visible {
+        display: flex;
+      }
+
+      .nav-list .btn:nth-child(1) { 
+        order: 2; 
+        }
+
+        .nav-list .btn:nth-child(2) { 
+        order: 1;  
+        visibility: hidden;
+        }
+
+      .menu {
+        background-color: var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        padding: 12px;
+        z-index: 1000;
+      }
+
+      .menu > ul li:nth-child(6) {
+        margin-top: 18px;
+      }
+
+      .invisible {
+        display: none;
+      }
+
+      .frm-registro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+
+      }
+
+      .error {
+        color: red;
+        font-size: small;
+      }
+      /* Media queries */
+
+      @media only screen and (max-width: 768px) {
+        .nav {
+          gap: 20px;
+        }
+
+        .nav h1 {
+          font-size: large;
+        }
+
+        .nav-list {
+          gap: 4px;
+        }
+
+        footer,
+        article {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        article {
+          width: 95%;
+        }
+
+        .nav-list {
+          display: none;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          top: 50px;
+          left: 0;
+          width: 100%;
+          background-color: var(--secondary-color);
+          padding: 10px;
+        }
+
+        .nav-list li {
+          margin-bottom: 10px;
+        }
+
+        .nav-list a {
+          color: var(--primary-color);
+          font-size: large;
+        }
+
+        .nav-toggle {
+          display: block;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: large;
+          color: var(--primary-color);
+          cursor: pointer;
+        }
+
+        h1[class='logo'] {
+          font-size: larger;
+        }
+
+        .frm {
+          width: 90%;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+
+      }
+
+      @media only screen and (max-width: 480px) {
+        .nav {
+          gap: 10px;
+        }
+
+        .nav h1 {
+          font-size: medium;
+        }
+
+        .nav-list {
+          gap: 8px;
+        }
+
+        footer,
+        article {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        main {
+          margin: 50px 4px;
+        }
+
+        .frm-grid {
+          display: flex;
+          flex-direction: column;
+        }
+
+        select {
+          width: 100%;
+          font-size: smaller;
+        }
+        option {
+          font-size: 14px;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        h1[class='logo'] {
+          font-size: xx-large;
+        }
+
+        .frm {
+          width: 90%;
+        }
+
+        .frm-flex > label {
+          font-size: 14px;
+        }
+
+        .frm-flex {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .main-info {
+        flex: 1 1 200px;
+        min-width: 200px;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #2e2c2f;
+      }
+
+
+      }
+    </style>
+  </head>
+  <body id="inicio">
+    <header class="nav">
+      <h1 class="logo">Logo</h1>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/#inicio">Inicio</a></li>
+          <li><a href="/#lista-beneficios">Beneficios</a></li>
+          <li><a href="/#lista-precios">Precios</a></li>
+          <li>
+            <a href="contacto.html">Contacto</a>
+          </li>
+          <li>
+            <a href="/#integrantes">Integrantes</a>
+          </li>
+        </ul>
+
+        <span class="nav-toggle">
+          <img src="/assets/icon/burger-bar.png" />
+        </span>
+      </nav>
+      <span class="nav-list">
+        <a href="/dashboard.html" class="btn">Iniciar sesión</a>
+        <a class="btn">Registrarse</a>
+      </span>
+      <div class="menu invisible">
+        <ul>
+          <li><a href="/#inicio">Inicio</a></li>
+          <li><a href="/#lista-beneficios">Beneficios</a></li>
+          <li><a href="/#lista-precios">Precios</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="/#integrantes">Integrantes</a></li>
+
+          <li><a href="/dashboard.html">Iniciar sesión</a></li>
+          <li><a>Registrarse</a></li>
+        </ul>
+      </div>
+    </header>
+    <main class="main">
+      <div class="main-info">
+      <section class="frm-registro">
+        
+        <article>
+          <h2>Regístrate</h2>
+          <p>
+            Bienvenido a nuestro sistema de gestión de membresías.
+            Crea tu cuenta para acceder a todas las herramientas
+            y funciones que te ayudarán a administrar tus membresías.
+          </p>
+        </article>
+        <form
+          id="frmRegistro"
+          class="frm"
+          method="POST"
+          onsubmit="enviarFormulario(event)"
+        >
+          <div class="frm-grid">
+            <div class="frm-campo">
+              <label for="nombre">Nombre:</label>
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ingrese su nombre"
+                oninput="validarCampo(this)"
+                required
+              />
+              <span class="error" id="errorNombre"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="apellido">Apellido:</label>
+              <input
+                type="text"
+                id="apellido"
+                name="apellido"
+                placeholder="Ingrese su apellido"
+                oninput="validarCampo(this)"
+                required
+              />
+              <span class="error" id="errorApellido"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="telefono">Teléfono:</label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                placeholder="Ingrese su teléfono"
+                oninput="validarTelefono(this)"
+                required
+              />
+              <span class="error" id="errorTelefono"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="correo">Correo Electrónico:</label>
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                placeholder="Ingrese su correo electrónico"
+                oninput="validarEmail(this)"
+                required
+              />
+              <span class="error" id="errorCorreo"></span>
+            </div>
+            <div class="frm-campo">
+              <label for="contrasena">Contraseña:</label>
+              <input
+                type="password"
+                id="contrasena"
+                name="contrasena"
+                placeholder="Ingrese su contraseña"
+                required
+              />
+            </div>
+            <div class="frm-campo">
+              <label for="opciones">Tipo de compañia:</label>
+              <select id="opciones" name="opciones" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+                <option value="opcion1">Individual</option>
+                <option value="opcion2">Privada</option>
+                <option value="opcion3">Publica</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="frm-terminos">
+            <label for="terminos">
+              <input type="checkbox" id="terminos" name="terminos" required />
+              Acepto los términos y condiciones 
+            </label>
+          </div>
+          <div class="frm-flex">
+            <button type="submit">Registrarse</button>
+          </div>
+        </form>
+
+      </section>
+      </div>
+    </main>
+    <footer id="integrantes">
+        <section>
+          <h3>Integrantes</h3>
+          <small style="margin-bottom: 20px"
+            >Click para dirigirse a cada pagina</small
+          >
+  
+          <address style="font-style: normal">
+            <ul>
+              <li><a href="/index.html">Olvera Suarez Jefferson</a></li>
+              <li><a href="/dashboard.html">Carvajal Barcia Yeffrey Jair</a></li>
+              <li><a href="/reportes.html">Fernández Almeida Jair Javier</a></li>
+              <li>
+                <a href="/suscripciones.html">Jahir Bismark Fernández Nanande</a>
+              </li>
+              <li><a href="/miembros.html">Anchundia Caicedo Naldo Jonnel</a></li>
+            </ul>
+          </address>
+          <small>&copy; 2024 Grupo #5</small>
+        </section>
+      </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const navToggle = document.querySelector('.nav-toggle');
+        const menu = document.querySelector('.menu');
+        navToggle.addEventListener('click', function () {
+          menu.classList.toggle('invisible');
+        });
+      });
+
+      function validarCampo(input) {
+        const errorSpan = input.nextElementSibling;
+        if (!/^[a-zA-Z\s]+$/.test(input.value)) {
+          errorSpan.textContent = 'Este campo solo acepta letras.';
+        } else if (input.value.length < 3) {
+          errorSpan.textContent = 'El campo debe tener al menos 3 caracteres.';
+        } else {
+          errorSpan.textContent = '';
+        }
+      }
+
+      function validarEmail(input) {
+        const errorSpan = input.nextElementSibling;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(input.value)) {
+          errorSpan.textContent = 'Por favor, introduce un correo electrónico válido.';
+        } else {
+          errorSpan.textContent = '';
+        }
+      }
+
+      function validarTelefono(input) {
+        const errorSpan = input.nextElementSibling;
+        if (!/^\d{10}$/.test(input.value)) {
+          errorSpan.textContent = 'El teléfono debe tener 10 dígitos.';
+        } else {
+          errorSpan.textContent = '';
+        }
+      }
+
+      function enviarFormulario(event) {
+        event.preventDefault();
+        const form = event.target;
+        const nombre = form.nombre.value.trim();
+        const apellido = form.apellido.value.trim();
+        const telefono = form.telefono.value.trim();
+        const correo = form.correo.value.trim();
+        const contrasena = form.contrasena.value.trim();
+        const opciones = form.opciones.value;
+        const terminos = form.terminos.checked;
+
+        if (!nombre || !apellido || !telefono || !correo || !contrasena || !opciones || !terminos) {
+          alert('Por favor, completa todos los campos y acepta los términos y condiciones.');
+          return;
+        }
+
+        alert('Registro exitoso');
+        form.reset();
+      }
+    </script>
+  </body>
+</html>

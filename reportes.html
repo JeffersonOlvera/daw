@@ -12,9 +12,68 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
     />
+    <!-- Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+      *{
+        box-sizing: border-box;
+      }
+
       body {
         display: flex;
+      }
+      .sidebar {
+        width: 20%;
+        background-color: var(--secondary-color);
+        padding: 15px;
+        border-right: 1px solid var(--white);
+      }
+
+      .sidebar h1 {
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .sidebar ul {
+        margin-top: 18px;
+      }
+
+      .sidebar ul li {
+        margin-bottom: 15px;
+      }
+
+      .sidebar ul li a {
+        color: var(--white);
+        padding: 10px;
+        display: block;
+        border-radius: 6px;
+        transition: all 0.3s;
+      }
+
+      .sidebar ul li a:hover {
+        background-color: var(--hover-color);
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .header {
+        background-color: var(--secondary-color);
+        color: var(--white);
+        padding: 10px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--white);
+      }
+
+      .main {
+        flex: 1;
+        padding: 20px;
+        background-color: var(--background);
       }
 
       .header-side button {
@@ -36,6 +95,8 @@
         flex: 1;
         padding: 20px;
         background-color: var(--background);
+        max-width: 1500px;
+        margin: 0 auto;
       }
 
       .subs {
@@ -98,8 +159,13 @@
         flex-direction: column;
       }
 
+      .chart-container {
+        width: 90%;
+        height: 50%;
+      }
+
       #subs-chart {
-        width: 45%;
+        width: 60%;
         height: auto;
       }
 
@@ -172,34 +238,18 @@
       }
 
       @media (max-width: 576px) {
-        .sidebar {
-          width: 20%;
-          font-size: 0.6em;
-        }
-        .header h2 {
-          font-size: 1.2em;
-        }
-        .header-side button {
-          font-size: 14px;
-          padding: 5px 10px;
-        }
-        .subs {
-          flex-direction: column;
-        }
-        .main-info {
-          width: 100%;
-          margin-bottom: 20px;
+        .sidebar ul :nth-child(6){
+          padding: 0 10px;
+          max-width: 100px;
         }
         .info {
           flex-direction: column;
         }
         .info-subs {
           width: 100%;
+          padding: 0;
         }
 
-        #info-content {
-          flex-direction: column;
-        }
       }
 
       @media (max-width: 400px) {
@@ -227,6 +277,8 @@
         <li><a href="/miembros.html">Miembros</a></li>
         <li><a href="/suscripciones.html">Suscripciones</a></li>
         <li><a href="/reportes.html">Reportes</a></li>
+        <li><a href="/soporte.html">Soporte</a></li>
+        <li><a href="/conformidad.html">Conformidad</a></li>
         <li><a href="/index.html" id="btn-cerrar-sesion">Cerrar Sesion</a></li>
       </ul>
     </nav>
@@ -290,11 +342,9 @@
                   <p>Expirados 34%</p>
                 </div>
               </div>
-              <img
-                id="subs-chart"
-                src="/assets/img/chart.png"
-                alt="Gráfico de porcentaje de suscripciones"
-              />
+              <div class="chart-container">
+                <canvas id="subs-chart"></canvas>
+              </div>
             </div>
           </div>
 
@@ -322,5 +372,33 @@
         </section>
       </main>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ctx = document.getElementById("subs-chart").getContext("2d");
+        const subsChart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            datasets: [
+              {
+                data: [66, 34],
+                backgroundColor: ["#9145b6", "#fff"],
+                borderColor: ["#9145b6", "#f8f9fa"],
+                // borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        });
+      });
+    </script>
   </body>
 </html>
